@@ -19,7 +19,7 @@ const AddTransactionhtmlForm = () => {
                     text,
                     amount:+amount
                 }
-                console.log(newTransaction.id)
+                
             addTransaction(newTransaction);
 
            }
