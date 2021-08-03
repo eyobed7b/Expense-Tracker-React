@@ -19,4 +19,5 @@ app.use(express.json())
 app.use('/api/v1/transactions',transaction)
 
 const PORT = process.env.PORT || 5000
+
 app.listen(PORT , console.log(`server is running on ${process.env.NODE_ENV} mode and on ${PORT} port`));
