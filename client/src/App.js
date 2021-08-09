@@ -5,10 +5,10 @@ import Balance from './components/Balance'
 import IncomeExpenses from './components/IncomeExpenses'
 import{ TransactionList} from './components/TransactionList'
 import AddTransactionForm from './components/AddTransactionForm'
-import {GlobalProvider } from './context/GolbalState'
+
 function App() {
   return (
-    <GlobalProvider  >
+    <div>
     <Header/>
     
     <div>
@@ -18,7 +18,7 @@ function App() {
     <AddTransactionForm/>
     </div>
     
-    </GlobalProvider>
+    </div>
   );
 }
 

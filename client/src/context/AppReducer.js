@@ -1,6 +1,35 @@
 
 export default (state,action)=>{
     switch(action.type){
+        
+
+        case 'SIGNUP':
+            console.log("yes")
+            return{
+                
+                ...state,
+                userInfo: action.payload 
+            }
+            case 'SIGNIN_ERROR':
+                
+                return{
+                    ...state,
+                    error: action.payload
+                }
+
+        case 'SIGNIN':
+            console.log("yes")
+            return{
+                
+                ...state,
+                userInfo: action.payload 
+            }
+            case 'SIGNIN_ERROR':
+                
+                return{
+                    ...state,
+                    error: action.payload
+                }
         case 'GET_TRANSACTION':
             return{
                 ...state,

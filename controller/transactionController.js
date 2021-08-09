@@ -16,6 +16,27 @@ res.send('Get transaction');
 
 
 }
+exports.newTransaction  = async (req,res,next) => {
+    // res.send('POST transaction');
+    let transcation = new Transaction({
+        text:req.body.text,
+        amount:req.body.amount
+    })
+    try{
+    let result = await transcation.save()
+    res.send(result)
+    }catch(err){
+     if(err.name=='ValidationError'){
+  let message = Object.values(err.errors).map(val => val.message)
+   res.status(500).send({
+       sucess:false,
+       error:message
+   })
+     }else{
+        res.status(500).send(err.name)
+     }
+    }
+    }
 
 exports.addTransaction = async (req,res,next) => {
     // res.send('POST transaction');

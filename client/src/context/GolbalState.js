@@ -7,13 +7,92 @@ const initialState ={
        
         ],
         error:null,
-        loading:true
+        loading:true,
+        userInfo:null
 }
 
 export const GlobalCOntext = createContext(initialState)
 
 export const GlobalProvider = ({children})=>{
     const [state , dispatch] = useReducer(AppReducer,initialState)
+    async function signup (name,email,password){
+        const  API = "http://localhost:5000/api"
+        console.log(name+email+password)
+         try{
+            
+ 
+        
+             console.log("yes")
+             const config = {
+                 headers: {
+                     'Content-Type': 'application/json',
+                     // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
+                     
+                 },
+             }
+     
+             const {data} = 
+             await axios.post(
+                 `${API}/signup`,
+                 {name,email, password},
+                 config
+             )
+             console.log(data)
+             
+             dispatch({
+                 type:"SIGNIN",
+                 payload: data
+             })
+          }catch(err){
+             dispatch({
+                 type:"SIGNUP_ERROR",
+                 payload: err.response && err.response.data.message
+                 ? err.response.data.message
+                 : err.message
+             })
+          }
+ 
+      }
+ 
+  
+
+    async function signin (email,password){
+       const  API = "http://localhost:5000/api"
+        try{
+           
+
+       
+            console.log("yes")
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
+                    
+                },
+            }
+    
+            const {data} = 
+            await axios.post(
+                `${API}/signin`,
+                {email, password},
+                config
+            )
+            console.log(data)
+            
+            dispatch({
+                type:"SIGNIN",
+                payload: data
+            })
+         }catch(err){
+            dispatch({
+                type:"SIGNIN_ERROR",
+                payload: err.response && err.response.data.message
+                ? err.response.data.message
+                : err.message
+            })
+         }
+
+     }
 
     async function getTransaction (){
          try{
@@ -29,7 +108,7 @@ export const GlobalProvider = ({children})=>{
             })
          }
      }
-
+ 
     async function deleteTransaction (id){
     
         try{
@@ -76,6 +155,9 @@ return (<GlobalCOntext.Provider  value={{
     transaction:state.transaction,
     error:state.error,
     loading:state.loading,
+    userInfo:state.userInfo,
+    signup,
+    signin,
     getTransaction,
     deleteTransaction,
     addTransaction
