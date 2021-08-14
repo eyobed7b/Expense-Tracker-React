@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectId } = mongoose.Schema;
  
 
  
@@ -17,6 +18,13 @@ const mongoose = require('mongoose')
          type:Number,
          required:[true,'please insert the amount']
      },
+     userId:{
+                 type:ObjectId,
+                 required:true,
+                 ref: 'User'
+
+     },
+     
      createdAt:{
          type:Date,
          default:Date.now

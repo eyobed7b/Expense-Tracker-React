@@ -3,10 +3,10 @@ import {GlobalCOntext}  from '../context/GolbalState'
 import {Transaction} from './Transaction'
 
 export const TransactionList = () => {
-    const {transaction,getTransaction} = useContext(GlobalCOntext)
+    const {transaction,getTransaction,userInfo} = useContext(GlobalCOntext)
 
     useEffect(()=>{
-        getTransaction()
+        getTransaction(userInfo)
     },[]);
    
     return (

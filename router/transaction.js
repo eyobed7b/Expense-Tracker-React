@@ -6,9 +6,9 @@
 //  router.route('/').get(getTransaction).post(addTransaction)
 //  router.route('/:id').delete(deleteTransaction)
 
-router.get('/v1/transactions',getTransaction)
+router.get('/v1/transactions/:id',getTransaction)
 router.post('/v1/transactions',addTransaction)
-router.post('/v1/newTransaction',addTransaction)
+
 router.delete('/v1/transactions/:id',deleteTransaction)
 
 

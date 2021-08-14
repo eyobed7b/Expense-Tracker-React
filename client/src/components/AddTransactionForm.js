@@ -6,7 +6,7 @@ const AddTransactionhtmlForm = () => {
    
         const [text, setText ] =useState('')
         const [amount, setamount ] =useState(0)
-        const{addTransaction } = useContext(GlobalCOntext)
+        const{addTransaction,userInfo } = useContext(GlobalCOntext)
            const onSubmit =( e)=>{
               
                e.preventDefault();
@@ -17,7 +17,8 @@ const AddTransactionhtmlForm = () => {
                 const newTransaction = {
                     id:Math.floor(Math.random() * 100000000),
                     text,
-                    amount:+amount
+                    amount:+amount,
+                    userId:userInfo._id
                 }
                 
             addTransaction(newTransaction);

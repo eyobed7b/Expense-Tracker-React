@@ -94,9 +94,17 @@ export const GlobalProvider = ({children})=>{
 
      }
 
-    async function getTransaction (){
+    async function getTransaction (userInfo){
          try{
-            const res = await axios.get('/api/v1/transactions')
+            console.log(userInfo['_id'])
+             const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
+                    
+                },
+            }
+            const res = await axios.get('/api/v1/transactions/'+userInfo['_id'], config)
             dispatch({
                 type:"GET_TRANSACTION",
                 payload:res.data.data
