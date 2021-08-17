@@ -4,7 +4,7 @@ export default (state,action)=>{
         
 
         case 'SIGNUP':
-            console.log("yes")
+          //  console.log("yes")
             return{
                 
                 ...state,
@@ -18,11 +18,12 @@ export default (state,action)=>{
                 }
 
         case 'SIGNIN':
-            console.log("yes")
+            
             return{
                 
                 ...state,
-                userInfo: action.payload 
+      userInfo: action.payload 
+             
             }
             case 'SIGNIN_ERROR':
                 

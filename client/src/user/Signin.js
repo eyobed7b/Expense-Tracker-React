@@ -20,13 +20,18 @@ const Signin = ({ location, history }) => {
     // const userLogin = useSelector((state) => state.userLogin)
     // const { loading, error, userInfo } = userLogin
 
-    
+    // const saved = localStorage.getItem("userInfo");
+    // const initialValue = JSON.parse(saved);
 
     useEffect(() => {
+    // let user = localStorage.getItem('userInfo')
+       console.log(userInfo)
         if (userInfo) {
         //     if(userInfo.role==0)
         //     history.push('/health-care-admin')
         //     else if(userInfo.role==1)
+
+        
         history.push(`/expense-tracker`)
         // console.log("userInfo")
         }

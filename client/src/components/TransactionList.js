@@ -4,9 +4,10 @@ import {Transaction} from './Transaction'
 
 export const TransactionList = () => {
     const {transaction,getTransaction,userInfo} = useContext(GlobalCOntext)
+   // let user =  JSON.parse( userInfo)
 
     useEffect(()=>{
-        getTransaction(userInfo)
+        getTransaction( userInfo)
     },[]);
    
     return (

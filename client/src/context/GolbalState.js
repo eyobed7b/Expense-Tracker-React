@@ -62,7 +62,7 @@ export const GlobalProvider = ({children})=>{
            
 
        
-            console.log("yes")
+           // console.log("yes")
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,12 +77,17 @@ export const GlobalProvider = ({children})=>{
                 {email, password},
                 config
             )
-            console.log(data)
+          // console.log(data)
+         localStorage.setItem('userInfo', JSON.stringify(data))
+        //    console.log(state.userInfo)
             
             dispatch({
                 type:"SIGNIN",
                 payload: data
             })
+           
+
+
          }catch(err){
             dispatch({
                 type:"SIGNIN_ERROR",
@@ -96,15 +101,19 @@ export const GlobalProvider = ({children})=>{
 
     async function getTransaction (userInfo){
          try{
-            console.log(userInfo['_id'])
-             const config = {
+            console.log("userInfo")
+           let user = JSON.parse( userInfo)
+           
+               
+           const config = {
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`,
                     // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
                     
                 },
             }
-            const res = await axios.get('/api/v1/transactions/'+userInfo['_id'], config)
+            const res = await axios.get('/api/v1/transactions/'+user['_id'], config)
             dispatch({
                 type:"GET_TRANSACTION",
                 payload:res.data.data
@@ -117,10 +126,19 @@ export const GlobalProvider = ({children})=>{
          }
      }
  
-    async function deleteTransaction (id){
+    async function deleteTransaction (id,userInfo){
+        let user = JSON.parse( userInfo)
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`,
+                // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
+                
+            },
+        }
     
         try{
-            await axios.delete(`/api/v1/transactions/${id}`)
+            await axios.delete(`/api/v1/transactions/${id}`,config)
             dispatch({
                 type:"DELETE_TRANSACTION",
                 payload:id
@@ -133,10 +151,13 @@ export const GlobalProvider = ({children})=>{
          }
         
     }
-   async function addTransaction (transaction){
+   async function addTransaction (transaction,userInfo){
+    let user = JSON.parse( userInfo)
+           
        const config ={
            headers:{
-               "Content-Type":"application/json"
+               "Content-Type":"application/json",
+               Authorization: `Bearer ${user.token}`,
            }
        }
        try{
@@ -163,7 +184,7 @@ return (<GlobalCOntext.Provider  value={{
     transaction:state.transaction,
     error:state.error,
     loading:state.loading,
-    userInfo:state.userInfo,
+    userInfo:localStorage.getItem('userInfo'),
     signup,
     signin,
     getTransaction,
