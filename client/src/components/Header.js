@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 import {withRouter} from 'react-router-dom';
  
 const Header = ( ) => {
-  const {userInfo} = useContext(GlobalCOntext)
+  const {userInfo,signout} = useContext(GlobalCOntext)
   let history = useHistory();
 
    
@@ -32,8 +32,7 @@ const Header = ( ) => {
   const activateLasers =( e)=>{
               
     e.preventDefault();
-    localStorage.removeItem('userInfo')
-      history.push(`/`)
+    signout()
     
 
     

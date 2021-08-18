@@ -53,10 +53,13 @@ export const GlobalProvider = ({children})=>{
           }
  
       }
+
+    
  
   
 
     async function signin (email,password){
+    
        const  API = "http://localhost:5000/api"
         try{
            
@@ -98,8 +101,15 @@ export const GlobalProvider = ({children})=>{
          }
 
      }
+     async function signout (email,password){
+    
+       localStorage.removeItem('userInfo')
+       document.location.href = '/'
+ 
+      }
 
     async function getTransaction (userInfo){
+        
          try{
             console.log("userInfo")
            let user = JSON.parse( userInfo)
@@ -135,6 +145,7 @@ export const GlobalProvider = ({children})=>{
                 // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
                 
             },
+        
         }
     
         try{
@@ -187,6 +198,7 @@ return (<GlobalCOntext.Provider  value={{
     userInfo:localStorage.getItem('userInfo'),
     signup,
     signin,
+    signout,
     getTransaction,
     deleteTransaction,
     addTransaction
