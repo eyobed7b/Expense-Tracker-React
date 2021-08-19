@@ -60,7 +60,7 @@ export default (state,action)=>{
                 ...state,
                 transaction:state.transaction.filter(transaction=>transaction._id!==action.payload)
             }
-            case 'USER_DELET':
+            case 'USER_DELETE':
                 return{
                     ...state,
                     users:state.users.filter(user=>user._id!==action.payload)
