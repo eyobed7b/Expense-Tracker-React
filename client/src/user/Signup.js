@@ -22,14 +22,19 @@ const Signup = ({ history }) => {
 
     // const userRegister = useSelector((state) => state.userRegister)
     // const { loading, error, userInfo } = userRegister
-    const {userInfo, signup} = useContext(GlobalCOntext)
+    const {userInfo, signup,error} = useContext(GlobalCOntext)
 
 
     useEffect(() => {
         if (userInfo) {
-            history.push('/')
+            history.push('/expense-tracker')
         }
-    }, [history, userInfo])
+    }, [userInfo])
+    const showError = () => (
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+            {error}
+        </div>
+    );
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -106,10 +111,12 @@ const Signup = ({ history }) => {
 
     return (
         <>   
+         {showError()}
         {/* {showLoading()}
             {showError()} */}
             {message && <div className="alert alert-danger" style={{ display:  'none' }}>
                 {message}
+                 
             </div>}
             <div id="layoutAuthentication">
                 <div id="layoutAuthentication_content">

@@ -2,7 +2,19 @@
 export default (state,action)=>{
     switch(action.type){
         
-
+        case 'GET_USERS':
+             console.log("yes")
+              return{
+                  
+                  ...state,
+                  users: action.payload 
+              }
+              case 'GET_USERS_ERROR':
+                  
+                  return{
+                      ...state,
+                      error: action.payload
+                  }
         case 'SIGNUP':
           //  console.log("yes")
             return{
@@ -26,6 +38,7 @@ export default (state,action)=>{
              
             }
             case 'SIGNIN_ERROR':
+                 
                 
                 return{
                     ...state,
@@ -47,6 +60,11 @@ export default (state,action)=>{
                 ...state,
                 transaction:state.transaction.filter(transaction=>transaction._id!==action.payload)
             }
+            case 'USER_DELET':
+                return{
+                    ...state,
+                    users:state.users.filter(user=>user._id!==action.payload)
+                }
          case 'ADD_TRANSACTION':
              return{
                  ...state,

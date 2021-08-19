@@ -8,7 +8,8 @@ const initialState ={
         ],
         error:null,
         loading:true,
-        userInfo:null
+        userInfo:null,
+        users:[]
 }
 
 export const GlobalCOntext = createContext(initialState)
@@ -22,7 +23,7 @@ export const GlobalProvider = ({children})=>{
             
  
         
-             console.log("yes")
+            
              const config = {
                  headers: {
                      'Content-Type': 'application/json',
@@ -37,13 +38,15 @@ export const GlobalProvider = ({children})=>{
                  {name,email, password},
                  config
              )
-             console.log(data)
-             
+           
+             localStorage.setItem('userInfo', JSON.stringify(data))
              dispatch({
-                 type:"SIGNIN",
+                 type:"SIGNUP",
                  payload: data
              })
+            
           }catch(err){
+            console.log(err.message)
              dispatch({
                  type:"SIGNUP_ERROR",
                  payload: err.response && err.response.data.message
@@ -80,7 +83,7 @@ export const GlobalProvider = ({children})=>{
                 {email, password},
                 config
             )
-          // console.log(data)
+          console.log(data)
          localStorage.setItem('userInfo', JSON.stringify(data))
         //    console.log(state.userInfo)
             
@@ -92,6 +95,7 @@ export const GlobalProvider = ({children})=>{
 
 
          }catch(err){
+            console.log(err.message)
             dispatch({
                 type:"SIGNIN_ERROR",
                 payload: err.response && err.response.data.message
@@ -99,6 +103,7 @@ export const GlobalProvider = ({children})=>{
                 : err.message
             })
          }
+       
 
      }
      async function signout (email,password){
@@ -135,6 +140,61 @@ export const GlobalProvider = ({children})=>{
             })
          }
      }
+
+     async function getUsers(userInfo){
+        const  API = "http://localhost:5000/api"
+        try{
+           console.log("userInfo")
+          let user = JSON.parse( userInfo)
+          
+              
+          const config = {
+               headers: {
+                   'Content-Type': 'application/json',
+                   Authorization: `Bearer ${user.token}`,
+                   // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
+                   
+               },
+           }
+           const res = await axios.get(`${API}/userlist` )
+           console.log(res.data)
+           dispatch({
+               type:"GET_USERS",
+               payload:res.data
+           })
+        }catch(err){
+           dispatch({
+               type:"GET_USERS_ERROR",
+               payload:err.response.data.error
+           })
+        }
+    }
+    async function deleteUser (id,userInfo){
+        let user = JSON.parse( userInfo)
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`,
+                // 'Access-Control-Allow-Origin' : 'http://localhost:5000/api/signin',
+                
+            },
+        
+        }
+    
+        try{
+            await axios.delete(`/api/userdelete/${id}`,config)
+            dispatch({
+                type:"USER_DELETE",
+                payload:id
+            })
+         }catch(err){
+            dispatch({
+                type:"USER_DELETE_ERROR",
+                payload:err.response.data.error
+            })
+         }
+        
+    }
  
     async function deleteTransaction (id,userInfo){
         let user = JSON.parse( userInfo)
@@ -196,11 +256,14 @@ return (<GlobalCOntext.Provider  value={{
     error:state.error,
     loading:state.loading,
     userInfo:localStorage.getItem('userInfo'),
+    users:state.users,
+    getUsers,
     signup,
     signin,
     signout,
     getTransaction,
     deleteTransaction,
+    deleteUser,
     addTransaction
 }}>{children}</GlobalCOntext.Provider>);
 }

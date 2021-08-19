@@ -4,7 +4,7 @@ import {useContext} from 'react'
 import React, {useState, useEffect} from "react"
 import { useHistory } from 'react-router'
 import {withRouter} from 'react-router-dom';
-import {Nav,Button} from 'react-bootstrap'
+import {Nav,Button,Card} from 'react-bootstrap'
  
 const Header = ( ) => {
   const {userInfo,signout} = useContext(GlobalCOntext)
@@ -19,7 +19,7 @@ const Header = ( ) => {
         //     history.push('/health-care-admin')
         //     else if(userInfo.role==1)
 
-        console.log(userInfo)
+     
         if(!userInfo)
         console.log("yes")
           //  history.push(`/`)
@@ -46,21 +46,9 @@ const Header = ( ) => {
       <Nav variant="pills" defaultActiveKey="/home">
   <Nav.Item>
     <Button onClick={activateLasers} >signout</Button>
+    <Card.Title>{JSON.parse( userInfo).name}</Card.Title>
   </Nav.Item>
-  <Nav.Item>
-    <Button onClick={activateLasers} >signout</Button>
-  </Nav.Item><Nav.Item>
-    <Button onClick={activateLasers} >signout</Button>
-  </Nav.Item>
-  <Nav.Item>
-    <Button onClick={activateLasers} >signout</Button>
-  </Nav.Item>
-  <Nav.Item>
-    <Button onClick={activateLasers} >signout</Button>
-  </Nav.Item>
-  <Nav.Item>
-    <Button onClick={activateLasers} >signout</Button>
-  </Nav.Item>
+  
 
  
 </Nav>

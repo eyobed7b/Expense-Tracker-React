@@ -10,15 +10,17 @@ import {GlobalCOntext}  from './context/GolbalState'
 import React, {useState, useEffect} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,Card, Container} from 'react-bootstrap'
+import Admin from './components/Admin'
  
 
 function App({ location, history }) {
- 
+ const {userInfo}  =  useContext(GlobalCOntext)
   return (
      
       <Container >
       <Header/>
-    <Card style={{ width: '18rem' }}>
+       
+ { JSON.parse( userInfo).role==1?  <Card style={{ width: '18rem' }}>
     <Balance/>
   
   <Card.Body>
@@ -32,7 +34,7 @@ function App({ location, history }) {
   <AddTransactionForm/>
  
   </Card.Body>
-</Card>
+</Card>:<Admin/>}
   
       </Container>
 

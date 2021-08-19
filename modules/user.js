@@ -6,27 +6,7 @@ const bcrypt =  require('bcryptjs')
     .then(() => console.log("mongooes is connected "))
     .catch(err => console.log("ere   db connection ", err))
  
-    // const User = mongoose.model('User',new mongoose.Schema({
-    //     name:{
-    //         type:String,
-    //         trim:true,
-    //         required:[true,'please insert the name']
-    //     },
-    //     email:{
-    //         type:String,
-    //         required:[true,'please insert the email']
-    //     },
-    //     password:{
-    //         type:String,
-    //         required:[true,'please insert the password']
-    //     },
-    //     createdAt:{
-    //         type:Date,
-    //         default:Date.now
-    //     }
-    // }))
-
-    // const Usser = mongoose.model('User',)
+   
     const user = mongoose.Schema({
         name:{
             type:String,
@@ -44,7 +24,12 @@ const bcrypt =  require('bcryptjs')
         createdAt:{
             type:Date,
             default:Date.now
-        }
+        },
+         role:{
+             type:Number,
+             default:1,
+             required:true
+         },
     })
     user.methods.matchPassword = async function (enteredPassword) {
         return await bcrypt.compare(enteredPassword, this.password)
