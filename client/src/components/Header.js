@@ -4,6 +4,7 @@ import {useContext} from 'react'
 import React, {useState, useEffect} from "react"
 import { useHistory } from 'react-router'
 import {withRouter} from 'react-router-dom';
+import {Nav,Button} from 'react-bootstrap'
  
 const Header = ( ) => {
   const {userInfo,signout} = useContext(GlobalCOntext)
@@ -42,7 +43,28 @@ const Header = ( ) => {
 
     return (
       <>
-        <div  className="inc-exp-container">
+      <Nav variant="pills" defaultActiveKey="/home">
+  <Nav.Item>
+    <Button onClick={activateLasers} >signout</Button>
+  </Nav.Item>
+  <Nav.Item>
+    <Button onClick={activateLasers} >signout</Button>
+  </Nav.Item><Nav.Item>
+    <Button onClick={activateLasers} >signout</Button>
+  </Nav.Item>
+  <Nav.Item>
+    <Button onClick={activateLasers} >signout</Button>
+  </Nav.Item>
+  <Nav.Item>
+    <Button onClick={activateLasers} >signout</Button>
+  </Nav.Item>
+  <Nav.Item>
+    <Button onClick={activateLasers} >signout</Button>
+  </Nav.Item>
+
+ 
+</Nav>
+        {/* <div  className="inc-exp-container">
         <h2>
           Expense Tracker  
        
@@ -59,7 +81,7 @@ const Header = ( ) => {
         <div className="inc-exp-container">
           
          <p>Name {  JSON.parse( userInfo).name} </p>
-        </div>
+        </div> */}
 </>
     )
 }

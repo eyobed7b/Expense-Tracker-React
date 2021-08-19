@@ -8,24 +8,39 @@ import AddTransactionForm from './components/AddTransactionForm'
 import {useContext} from 'react'
 import {GlobalCOntext}  from './context/GolbalState'
 import React, {useState, useEffect} from "react"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button,Card, Container} from 'react-bootstrap'
  
 
 function App({ location, history }) {
  
   return (
-    <div>
-
-    <Header/>
+     
+      <Container >
+      <Header/>
+    <Card style={{ width: '18rem' }}>
+    <Balance/>
   
-    
-    <div>
-<Balance/>
-    <IncomeExpenses/>
+  <Card.Body>
+  <IncomeExpenses/>
+  
     <TransactionList/>
-    <AddTransactionForm/>
-    </div>
+  </Card.Body>
+ 
     
-    </div>
+  <Card.Body>
+  <AddTransactionForm/>
+ 
+  </Card.Body>
+</Card>
+  
+      </Container>
+
+    
+    
+    
+    
+    
   );
 }
 

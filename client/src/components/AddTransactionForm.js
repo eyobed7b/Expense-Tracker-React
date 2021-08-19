@@ -1,5 +1,6 @@
 import React,{useState,useContext} from 'react'
 import {GlobalCOntext} from '../context/GolbalState'
+import {Button} from 'react-bootstrap'
 
 const AddTransactionhtmlForm = () => {
 
@@ -40,7 +41,10 @@ const AddTransactionhtmlForm = () => {
           >
           <input type="number"   value ={amount} onChange={(e)=>setamount(e.target.value)}   placeholder="Enter amount..." />
         </div>
-        <button className="btn">Add transaction</button>
+        <Button onClick={onSubmit} className="btn">Add transaction
+
+        </Button>
+        {/* <button className="btn">Add transaction</button> */}
       </form>    
         </>
     )
