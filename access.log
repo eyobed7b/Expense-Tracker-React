@@ -1,0 +1,2 @@
+::ffff:127.0.0.1 - - [25/Aug/2021:22:52:53 +0000] "POST /api/v1/transactions HTTP/1.1" 200 148 "http://localhost:3000/expense-tracker" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0"
+::ffff:127.0.0.1 - - [25/Aug/2021:22:53:14 +0000] "DELETE /api/v1/transactions/6126c9c56c1992217cba2860 HTTP/1.1" 200 148 "http://localhost:3000/expense-tracker" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0"
